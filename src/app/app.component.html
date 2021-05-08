@@ -1,0 +1,119 @@
+<html>
+
+<head>
+
+</head>
+
+<body>
+  <h3> We are going to use the following array of fruits:</h3>
+  <pre>
+    <code>
+      myFruits = [
+      {{'{'}}id: 1, fruit:"Banana", weight:50, weightPeeled:43 {{'}'}},
+      {{'{'}}id: 2, fruit:"Orange", weight:55, weightPeeled:45 {{'}'}},
+      {{'{'}}id: 5, fruit:"Apple", weight:60, weightPeeled:58 {{'}'}},
+      {{'{'}}id: 17, fruit:"Mango", weight:100, weightPeeled:90 {{'}'}},
+      {{'{'}}id: 39, fruit:"Kiwi", weight:40, weightPeeled:38 {{'}'}}
+      ];
+    </code>
+  </pre>
+
+
+  <p> Developers usually use "for" or "foreach" statement to get all the information and select the needed one, but we
+    have the following functions in JavaScript/TypeScript that allow us to get the needed information in a quicker and
+    clear way.</p>
+  <h2>Using <strong> .map() </strong> function in arrays:</h2>
+  <p> Let's say we need to get the ids of the diferent elements in our array, in our case, the fruits' ids</p>
+  <p>We can use .map() function with or without arrow functions:</p>
+  <h4>Without arrow funtcion:</h4>
+  <pre>
+    <code>
+      var fruitIds = myFruits.map(function (fruit) {{'{'}}
+        return fruit.id
+      {{'}'}});
+    </code>
+  </pre>
+  <h5>Result:</h5>
+  <p>{{ fruitsMap }}</p>
+  <h4>With arrow funtcion:</h4>
+  <pre>
+    <code>
+      var fruitIds = myFruits.map(fruit => fruit.id);
+    </code>
+  </pre>
+  <h5>Result:</h5>
+  <p>{{ fruitsMapArrow }}</p>
+
+
+
+  <h2>Using <strong>.reduce()</strong> function in arrays:</h2>
+  <p> Let's say we need the total of some number field, in our case, the fruits' weight</p>
+  <p>Like .map() function, .reduce() function can be used with or without arrow functions:</p>
+  <h4>Without arrow funtcion:</h4>
+  <pre>
+    <code>
+      var totalFruitsWeight = this.myFruits.reduce(function (accumulator, fruit) {{'{'}}
+        return accumulator + fruit.weight;
+        {{'}'}}, 0);
+    </code>
+  </pre>
+  <h5>Result:</h5>
+  <p>{{ totalFruitsWeight }}</p>
+  <h4>With arrow funtcion:</h4>
+  <pre>
+    <code>
+      var totalFruitWeightArrow = this.myFruits.reduce((acc, fruit) => acc + fruit.weight, 0);
+    </code>
+  </pre>
+  <h5>Result:</h5>
+  <p>{{ totalFruitsWeightArrow }}</p>
+  <h4>We can get one object from the array, for example, the heaviest fruit</h4>
+  <pre>
+    <code>
+      var heaviestFruit = this.myFruits.reduce(function (heaviest, fruit) {{'{'}}
+        return (fruit.weight || 0) > fruit.weight ? heaviest : fruit;
+      {{'}'}}, {{'{'}} {{'}'}});
+    </code>
+  </pre>
+  <h5>Result:</h5>
+  <p>{{'{'}}id: 39, fruit: "Kiwi", weight: 40{{'}'}}
+  </p>
+  <p>As you could see, .reduce() function is an easy way to generate a single value or object from an array.
+  </p>
+
+  <h2>Using <strong>.filter()</strong> function in arrays:</h2>
+  <p>This is useful when you have an array, but only want some of the elements in it based on a criteria. For example,
+    in our case we are going to get only the fruits with the weight with 60g or bigger</p>
+  <pre>
+    <code>
+      var moreThan60g = this.myFruits.filter(function (fruit) {{'{'}}
+        return fruit.weight >= 60;
+        {{'}'}});      
+    </code>
+  </pre>
+  <h5>Result:</h5>
+  <p>[0:{{'{'}}id: 5, fruit: "Apple", weight: 60{{'}'}},
+    <br>
+    1:{{'{'}}id: 17, fruit: "Mango", weight: 100{{'}'}}]
+  </p>
+
+  <h2>Furthemore, you can combine all of them as needed:</h2>
+  <p>To check how to combine all of them, we will get the weight of the peel of this box of fruit, but we know that the
+    fruits with even identifiers are not available.
+    <br>First of all we are going to FILTER the fruits which id is odd. Then we will substract the weight and the weight
+    peeled, to get weight of the peel for each fruit using the MAP function. Finally we will use REDUCE function to
+    calculate the total weight of the peel.
+  </p>
+  <pre>
+    <code>
+      peelWeight = this.myFruits.filter(function (fruit) {{'{'}} return fruit.id % 2 != 0; {{'}'}})
+      .map(fruit => fruit.weight - fruit.weightPeeled)
+      .reduce(function (total, peel) {{'{'}} return total + peel {{'}'}}, 0);
+    </code>
+  </pre>
+  <h5>Result:</h5>
+  <p>{{peelWeight}}</p>
+
+</body>
+
+</html>
